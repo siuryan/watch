@@ -40,6 +40,7 @@ bool Watch::should_sleep(int *position) {
 void Watch::update() {
     clear();
 
+    /*
     int position[3];
     watch_system.get_accel_data(position);
     bool sleep = should_sleep(position);
@@ -48,6 +49,7 @@ void Watch::update() {
         sleep = should_sleep(position);
         delay(1000);
     }
+    */
 
     watch_system.update_time();
     watch_system.check_bluetooth();

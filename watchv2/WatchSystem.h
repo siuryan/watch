@@ -21,7 +21,6 @@
 
 #ifndef ADXL_H
 #define ADXL_h
-    #include <SPI.h>
     #include <ADXL362.h>
 #endif
 
@@ -31,13 +30,7 @@ class WatchSystem {
     static const int MAX_MESSAGES = 3;
     static const char *DATETIME_FORMAT;
 
-    // hardware spi
-    static const int OLED_DC = 6;
-    static const int OLED_CS = 7;
-    static const int OLED_RESET = 8;
-
-    // software spi
-    /*
+    /* Software SPI
     static const int OLED_MOSI = 9;
     static const int OLED_CLK = 10;
     static const int OLED_DC = 11;
@@ -45,7 +38,10 @@ class WatchSystem {
     static const int OLED_RESET = 13;
     */
 
-    static const int ACCEL_PIN = 10;
+    // I2C
+    static const int OLED_RESET = 4;
+
+    static const int ACCEL_PIN = 8;
 
     QueueArray<char *> messages;
     int num_messages;

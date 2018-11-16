@@ -5,9 +5,9 @@ const char *WatchSystem::DATETIME_FORMAT = "%d/%d/%d %d:%d:%d";
 
 WatchSystem::WatchSystem(Stream &serial)
     : num_messages(0),
-      display(OLED_DC, OLED_RESET, OLED_CS),
+      display(OLED_RESET),
       time_now(0), bt_conn(&serial) {
-    init_accel();
+    //init_accel();
 }
 
 void WatchSystem::init_accel() {
