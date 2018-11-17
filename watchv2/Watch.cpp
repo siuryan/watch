@@ -4,9 +4,11 @@
 #include "MessageScreen.h"
 
 #include <math.h>
+#include <Arduino.h>
 
 Watch::Watch(Stream &serial) :
-    current_screen(0), num_screens(0), watch_system(serial) {}
+    current_screen(0), num_screens(0), watch_system(serial),
+    l_button(L_BUTTON_PIN), r_button(R_BUTTON_PIN), pot_pin(A0) {}
 
 Watch::~Watch() {
     delete[] screens;
@@ -52,6 +54,8 @@ void Watch::update() {
     */
     watch_system.update_time();
     watch_system.check_bluetooth();
+
+    update_screen(l_button.is_pressed(), r_button.is_pressed(), analogRead(pot_pin));
 }
 
 void Watch::update_screen() {
