@@ -4,10 +4,11 @@
 const char *WatchSystem::DATETIME_FORMAT = "%d/%d/%d %d:%d:%d";
 
 WatchSystem::WatchSystem(Stream &serial)
-    : num_messages(0),
+    : num_messages(0), viewed_messages(false),
+      // display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS),
       display(OLED_RESET),
       time_now(0), bt_conn(&serial) {
-    //init_accel();
+    init_accel();
 }
 
 void WatchSystem::init_accel() {
@@ -43,6 +44,14 @@ time_t WatchSystem::get_time_now() {
     return time_now;
 }
 
+bool WatchSystem::has_viewed_messages() {
+    return viewed_messages;
+}
+
+void WatchSystem::set_viewed_messages(bool vm) {
+    viewed_messages = vm;
+}
+
 void WatchSystem::clear_messages() {
     for (int i = 0; i < messages.count(); ++i) {
         delete messages.pop();
@@ -72,6 +81,7 @@ void WatchSystem::check_bluetooth() {
 
         messages.push(message);
         ++num_messages;
+        viewed_messages = false;
         break;
 
     case 2:

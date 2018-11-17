@@ -30,7 +30,8 @@ class WatchSystem {
     static const int MAX_MESSAGES = 3;
     static const char *DATETIME_FORMAT;
 
-    /* Software SPI
+    /* Software SPI */
+    /*
     static const int OLED_MOSI = 9;
     static const int OLED_CLK = 10;
     static const int OLED_DC = 11;
@@ -45,6 +46,7 @@ class WatchSystem {
 
     QueueArray<char *> messages;
     int num_messages;
+    bool viewed_messages;
 
     Adafruit_SSD1306 display;
     time_t time_now;
@@ -64,6 +66,8 @@ class WatchSystem {
     Adafruit_SSD1306 * get_display();
     time_t get_time_now();
     void get_accel_data(int *position);
+    bool has_viewed_messages();
+    void set_viewed_messages(bool vm);
 
     void clear_messages();
     void update_time();

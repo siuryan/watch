@@ -64,7 +64,7 @@ void HomeScreen::update(WatchSystem *watch_system) {
     drawClock(display, hour(t), minute(t));
 
     display->setCursor(display->width()-5, 5);
-    if (watch_system->get_num_messages() > 0) {
+    if (watch_system->get_num_messages() > 0 && !watch_system->has_viewed_messages()) {
         display->println("*");
     }
     display->display();
