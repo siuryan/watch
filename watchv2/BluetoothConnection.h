@@ -8,15 +8,15 @@
 class BluetoothConnection {
 
     public:
-    static const int MAX_MESSAGE_SIZE = 32;
+    static const uint8_t MAX_MESSAGE_SIZE = 32;
 
     BluetoothConnection();
-    int get_message(char *message);
+    uint8_t get_message(char *message);
     void send_message(char *message);
 
     private:
-    static const int SS_RX_PIN = 10;
-    static const int SS_TX_PIN = 11;
+    static const uint8_t SS_RX_PIN = 10;
+    static const uint8_t SS_TX_PIN = 11;
 
     SoftwareSerial serial;
 

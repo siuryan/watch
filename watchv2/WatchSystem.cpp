@@ -24,15 +24,15 @@ QueueArray<char *> * WatchSystem::get_messages() {
     return &messages;
 }
 
-void WatchSystem::get_messages(char **arr, int num_messages) {
+void WatchSystem::get_messages(char **arr, byte num_messages) {
     messages.toArray(arr, num_messages);
 }
 
-int WatchSystem::get_num_messages() {
+byte WatchSystem::get_num_messages() {
     return num_messages;
 }
 
-int WatchSystem::get_num_stored_messages() {
+byte WatchSystem::get_num_stored_messages() {
     return messages.count();
 }
 
@@ -53,7 +53,7 @@ void WatchSystem::set_viewed_messages(bool vm) {
 }
 
 void WatchSystem::clear_messages() {
-    for (int i = 0; i < messages.count(); ++i) {
+    while (!messages.isEmpty()) {
         delete messages.pop();
     }
     num_messages = 0;
@@ -66,7 +66,7 @@ void WatchSystem::update_time() {
 
 void WatchSystem::check_bluetooth() {
     char *message = new char[bt_conn.MAX_MESSAGE_SIZE];
-    int msg_status = bt_conn.get_message(message);
+    byte msg_status = bt_conn.get_message(message);
 
     switch (msg_status) {
 

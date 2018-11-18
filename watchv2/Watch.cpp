@@ -63,15 +63,15 @@ void Watch::update_screen() {
     screens[current_screen]->update(&watch_system);
 }
 
-void Watch::update_screen(bool button1_pressed, bool button2_pressed, int pot_pos) {
-    int screen = map(pot_pos, 0, 667, 0, num_screens);
+void Watch::update_screen(bool button1_pressed, bool button2_pressed, short int pot_pos) {
+    short int screen = map(pot_pos, 0, 667, 0, num_screens);
     if (screen <= 0 || screen >= num_screens) screen == 0;
     switch_screen(screen);
 
     screens[current_screen]->update(&watch_system, button1_pressed, button2_pressed, pot_pos);
 }
 
-void Watch::switch_screen(int new_screen) {
+void Watch::switch_screen(byte new_screen) {
     new_screen %= MAX_SCREENS;
     current_screen = new_screen;
 }

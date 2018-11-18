@@ -1,7 +1,7 @@
 class VibrationMotor {
 
     public:
-    VibrationMotor(int pin) : pin(pin) {
+    VibrationMotor(byte pin) : pin(pin) {
         pinMode(pin, OUTPUT);
     }
 
@@ -12,6 +12,6 @@ class VibrationMotor {
     }
 
     private:
-    int pin;
+    byte pin;
 
 };

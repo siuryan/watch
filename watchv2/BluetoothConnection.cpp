@@ -4,7 +4,7 @@ BluetoothConnection::BluetoothConnection() : serial(SoftwareSerial(SS_RX_PIN, SS
     serial.begin(9600);
 }
 
-void remove_header(char *message, int size) {
+void remove_header(char *message, uint8_t size) {
     for (int i = 0; i < size - 1; ++i) {
         message[i] = message[i+1];
     }
@@ -16,12 +16,12 @@ void remove_header(char *message, int size) {
  * 1: notif
  * 2: time
  */
-int BluetoothConnection::get_message(char *message) {
+uint8_t BluetoothConnection::get_message(char *message) {
     if (!serial.available()) {
         return 0;
     }
 
-    int size = 0;
+    uint8_t size = 0;
     while (serial.available() && size < MAX_MESSAGE_SIZE - 1) {
         message[size++] = serial.read();
         message[size] = '\0';

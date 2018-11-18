@@ -32,26 +32,17 @@
 class WatchSystem {
 
     private:
-    static const int MAX_MESSAGES = 3;
+    static const byte MAX_MESSAGES = 3;
     static const char *DATETIME_FORMAT;
 
-    /* Software SPI */
-    /*
-    static const int OLED_MOSI = 9;
-    static const int OLED_CLK = 10;
-    static const int OLED_DC = 11;
-    static const int OLED_CS = 12;
-    static const int OLED_RESET = 13;
-    */
-
     // I2C
-    static const int OLED_RESET = 4;
+    static const byte OLED_RESET = 4;
 
-    static const int ACCEL_PIN = 8;
-    static const int VIBR_MOTOR_PIN = 3;
+    static const byte ACCEL_PIN = 8;
+    static const byte VIBR_MOTOR_PIN = 3;
 
     QueueArray<char *> messages;
-    int num_messages;
+    byte num_messages;
     bool viewed_messages;
 
     Adafruit_SSD1306 display;
@@ -67,9 +58,9 @@ class WatchSystem {
     ~WatchSystem();
 
     QueueArray<char *> * get_messages();
-    void get_messages(char **arr, int num_messages);
-    int get_num_messages();
-    int get_num_stored_messages();
+    void get_messages(char **arr, byte num_messages);
+    byte get_num_messages();
+    byte get_num_stored_messages();
     Adafruit_SSD1306 * get_display();
     time_t get_time_now();
     void get_accel_data(int *position);

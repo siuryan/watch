@@ -30,7 +30,7 @@ void MessageScreen::update(WatchSystem *watch_system) {
     display->setCursor(0, 0);
     display->println(F("Notifications"));
 
-    int num_messages = watch_system->get_num_stored_messages();
+    byte num_messages = watch_system->get_num_stored_messages();
     if (num_messages == 0) {
         display->println();
         display->println(F("No new notifications"));
@@ -43,9 +43,21 @@ void MessageScreen::update(WatchSystem *watch_system) {
 
     display->setCursor(0, 25);
     display->println(msg_arr[current_msg]);
-    display->println(current_msg);
 
-    // TODO: display arrows
+    display->drawLine(0, display->height()-10, display->width(), display->height()-10, WHITE);
+    display->drawLine(display->width()/3, display->height()-10, display->width()/3, display->height(), WHITE);
+    display->drawLine(display->width()*2/3, display->height()-10, display->width()*2/3, display->height(), WHITE);
+
+    display->setCursor(0, display->height() - 7);
+    display->print(F("Clear"));
+
+    display->setCursor(display->width()/2 - 9, display->height() - 7);
+    display->print(String(current_msg + 1) + F("/") + String(num_messages));
+
+    display->setCursor(display->width() - 25, display->height() - 7);
+    if (num_messages > 1) {
+        display->print(F("Next"));
+    }
 
     display->display();
 }
@@ -53,11 +65,8 @@ void MessageScreen::update(WatchSystem *watch_system) {
 void MessageScreen::update(WatchSystem *watch_system,
                         bool button1_pressed, bool button2_pressed, int pot_pos) {
     if (button1_pressed) {
-        if (current_msg == 0) {
-            current_msg = watch_system->get_num_stored_messages() - 1;
-        } else {
-            --current_msg;
-        }
+        watch_system->clear_messages();
+        current_msg = 0;
     }
     if (button2_pressed) {
         ++current_msg %= watch_system->get_num_stored_messages();
