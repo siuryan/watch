@@ -43,6 +43,7 @@ void MessageScreen::update(WatchSystem *watch_system) {
 
     display->setCursor(0, 25);
     display->println(msg_arr[current_msg]);
+    display->println(current_msg);
 
     // TODO: display arrows
 
@@ -52,7 +53,11 @@ void MessageScreen::update(WatchSystem *watch_system) {
 void MessageScreen::update(WatchSystem *watch_system,
                         bool button1_pressed, bool button2_pressed, int pot_pos) {
     if (button1_pressed) {
-        --current_msg %= watch_system->get_num_stored_messages();
+        if (current_msg == 0) {
+            current_msg = watch_system->get_num_stored_messages() - 1;
+        } else {
+            --current_msg;
+        }
     }
     if (button2_pressed) {
         ++current_msg %= watch_system->get_num_stored_messages();

@@ -1,6 +1,8 @@
 #include "BluetoothConnection.h"
 
-BluetoothConnection::BluetoothConnection(Stream *serial) : serial(serial) {}
+BluetoothConnection::BluetoothConnection() : serial(SoftwareSerial(SS_RX_PIN, SS_TX_PIN)) {
+    serial.begin(9600);
+}
 
 void remove_header(char *message, int size) {
     for (int i = 0; i < size - 1; ++i) {
@@ -15,13 +17,13 @@ void remove_header(char *message, int size) {
  * 2: time
  */
 int BluetoothConnection::get_message(char *message) {
-    if (!serial->available()) {
+    if (!serial.available()) {
         return 0;
     }
 
     int size = 0;
-    while (serial->available() && size < MAX_MESSAGE_SIZE - 1) {
-        message[size++] = serial->read();
+    while (serial.available() && size < MAX_MESSAGE_SIZE - 1) {
+        message[size++] = serial.read();
         message[size] = '\0';
     }
 
@@ -43,5 +45,5 @@ int BluetoothConnection::get_message(char *message) {
 }
 
 void BluetoothConnection::send_message(char *message) {
-    serial->println(String(message));
+    serial.println(String(message));
 }

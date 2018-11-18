@@ -15,7 +15,7 @@
 
 class Watch {
     public:
-    Watch(Stream &serial);
+    Watch();
     ~Watch();
     void init();
     void clear();

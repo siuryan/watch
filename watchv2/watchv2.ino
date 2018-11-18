@@ -1,10 +1,8 @@
 #include "Watch.h"
 
-Watch watch(Serial);
+Watch watch;
 
 void setup() {
-  Serial.begin(9600);
-
   watch.init();
 }
 

@@ -3,12 +3,12 @@
 
 const char *WatchSystem::DATETIME_FORMAT = "%d/%d/%d %d:%d:%d";
 
-WatchSystem::WatchSystem(Stream &serial)
+WatchSystem::WatchSystem()
     : num_messages(0), viewed_messages(false),
       // display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS),
       display(OLED_RESET),
-      time_now(0), bt_conn(&serial) {
-    init_accel();
+      time_now(0), bt_conn(), vm(VIBR_MOTOR_PIN) {
+    //init_accel();
 }
 
 void WatchSystem::init_accel() {
@@ -82,6 +82,7 @@ void WatchSystem::check_bluetooth() {
         messages.push(message);
         ++num_messages;
         viewed_messages = false;
+        vm.vibrate(250);
         break;
 
     case 2:

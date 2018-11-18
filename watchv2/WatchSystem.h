@@ -24,6 +24,11 @@
     #include <ADXL362.h>
 #endif
 
+#ifndef VIBR_MOTOR_H
+#define VIBR_MOTOR_H
+    #include "VibrationMotor.h"
+#endif
+
 class WatchSystem {
 
     private:
@@ -43,6 +48,7 @@ class WatchSystem {
     static const int OLED_RESET = 4;
 
     static const int ACCEL_PIN = 8;
+    static const int VIBR_MOTOR_PIN = 3;
 
     QueueArray<char *> messages;
     int num_messages;
@@ -52,11 +58,12 @@ class WatchSystem {
     time_t time_now;
     BluetoothConnection bt_conn;
     ADXL362 xl;
+    VibrationMotor vm;
 
     void init_accel();
 
     public:
-    WatchSystem(Stream &serial);
+    WatchSystem();
     ~WatchSystem();
 
     QueueArray<char *> * get_messages();

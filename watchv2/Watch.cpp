@@ -6,9 +6,10 @@
 #include <math.h>
 #include <Arduino.h>
 
-Watch::Watch(Stream &serial) :
-    current_screen(0), num_screens(0), watch_system(serial),
-    l_button(L_BUTTON_PIN), r_button(R_BUTTON_PIN), pot_pin(A0) {}
+Watch::Watch() :
+    current_screen(0), num_screens(0), watch_system(),
+    l_button(L_BUTTON_PIN), r_button(R_BUTTON_PIN), pot_pin(A0) {
+}
 
 Watch::~Watch() {
     delete[] screens;
@@ -42,8 +43,8 @@ bool Watch::should_sleep(int *position) {
 void Watch::update() {
     clear();
 
-    int position[3];
-    watch_system.get_accel_data(position);
+    //int position[3];
+    //watch_system.get_accel_data(position);
     /*
     bool sleep = should_sleep(position);
 
@@ -59,13 +60,10 @@ void Watch::update() {
 }
 
 void Watch::update_screen() {
-    update();
     screens[current_screen]->update(&watch_system);
 }
 
 void Watch::update_screen(bool button1_pressed, bool button2_pressed, int pot_pos) {
-    update();
-
     int screen = map(pot_pos, 0, 667, 0, num_screens);
     if (screen <= 0 || screen >= num_screens) screen == 0;
     switch_screen(screen);
