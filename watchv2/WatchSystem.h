@@ -38,8 +38,8 @@ class WatchSystem {
     // I2C
     static const byte OLED_RESET = 4;
 
-    static const byte ACCEL_PIN = 8;
-    static const byte VIBR_MOTOR_PIN = 3;
+    static const byte ACCEL_PIN = 9;
+    static const byte VIBR_MOTOR_PIN = 3; // TODO 6
 
     QueueArray<char *> messages;
     byte num_messages;

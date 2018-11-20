@@ -25,7 +25,9 @@ class Watch {
     static const byte MAX_SCREENS = 5;
 
     static const byte L_BUTTON_PIN = 7;
-    static const byte R_BUTTON_PIN = 2;
+    static const byte R_BUTTON_PIN = 2; // TODO 8
+
+    static const byte POT_PIN = A0;
 
     Screen *screens[MAX_SCREENS];
     byte current_screen;
@@ -35,7 +37,6 @@ class Watch {
 
     Button l_button;
     Button r_button;
-    byte pot_pin;
 
     void check_bluetooth();
     void add_screen(Screen *screen);
