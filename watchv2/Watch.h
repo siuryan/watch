@@ -25,7 +25,7 @@ class Watch {
     static const byte MAX_SCREENS = 5;
 
     static const byte L_BUTTON_PIN = 7;
-    static const byte R_BUTTON_PIN = 2; // TODO 8
+    static const byte R_BUTTON_PIN = 5;
 
     static const byte POT_PIN = A0;
 
