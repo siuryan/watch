@@ -64,7 +64,7 @@ void Watch::update_screen() {
 }
 
 void Watch::update_screen(bool button1_pressed, bool button2_pressed, short int pot_pos) {
-    short int screen = map(pot_pos, 0, 667, 0, num_screens);
+    short int screen = map(pot_pos, 0, POT_MAX, 0, num_screens);
     if (screen <= 0 || screen >= num_screens) screen == 0;
     switch_screen(screen);
 

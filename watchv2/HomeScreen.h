@@ -67,6 +67,7 @@ void HomeScreen::update(WatchSystem *watch_system) {
     if (watch_system->get_num_messages() > 0 && !watch_system->has_viewed_messages()) {
         display->println("*");
     }
+
     display->display();
 }
 

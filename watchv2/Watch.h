@@ -24,10 +24,11 @@ class Watch {
     private:
     static const byte MAX_SCREENS = 5;
 
-    static const byte L_BUTTON_PIN = 7;
-    static const byte R_BUTTON_PIN = 5;
+    static const byte L_BUTTON_PIN = 8;
+    static const byte R_BUTTON_PIN = 7;
 
     static const byte POT_PIN = A0;
+    static const short int POT_MAX = 1050;
 
     Screen *screens[MAX_SCREENS];
     byte current_screen;

@@ -39,7 +39,7 @@ class WatchSystem {
     static const byte OLED_RESET = 4;
 
     static const byte ACCEL_PIN = 9;
-    static const byte VIBR_MOTOR_PIN = 3; // TODO 6
+    static const byte VIBR_MOTOR_PIN = 6;
 
     QueueArray<char *> messages;
     byte num_messages;

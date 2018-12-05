@@ -15,8 +15,8 @@ class BluetoothConnection {
     void send_message(char *message);
 
     private:
-    static const uint8_t SS_RX_PIN = 10;
-    static const uint8_t SS_TX_PIN = 11;
+    static const uint8_t SS_RX_PIN = 11;
+    static const uint8_t SS_TX_PIN = 10;
 
     SoftwareSerial serial;
 
