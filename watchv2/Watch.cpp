@@ -20,8 +20,10 @@ void Watch::init() {
     display->begin(SSD1306_SWITCHCAPVCC);
 
     display->display();
+    watch_system.init_accel();
 
     add_screen(new HomeScreen());
+    //add_screen(new TestScreen());
     add_screen(new MessageScreen());
 }
 
@@ -36,23 +38,19 @@ void Watch::clear() {
     watch_system.get_display()->clearDisplay();
 }
 
-bool Watch::should_sleep(int *position) {
-    return sqrt(position[0]*position[0] + position[1]*position[1] + position[2]*position[2]) < 3;
+bool Watch::should_sleep(double *position) {
+    return (position[2] < 8 || position[2] > 11)
+        || sqrt(position[0]*position[0] + position[1]*position[1] + position[2]*position[2]) > 12;
 }
 
 void Watch::update() {
     clear();
 
-    //int position[3];
-    //watch_system.get_accel_data(position);
-    /*
+    double position[3];
+    watch_system.get_accel_data(position);
     bool sleep = should_sleep(position);
+    watch_system.get_display()->dim(sleep);
 
-    while (sleep) {
-        sleep = should_sleep(position);
-        delay(1000);
-    }
-    */
     watch_system.update_time();
     watch_system.check_bluetooth();
 

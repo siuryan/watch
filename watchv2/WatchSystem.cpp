@@ -5,10 +5,8 @@ const char *WatchSystem::DATETIME_FORMAT = "%d/%d/%d %d:%d:%d";
 
 WatchSystem::WatchSystem()
     : num_messages(0), viewed_messages(false),
-      // display(OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS),
       display(OLED_RESET),
       time_now(0), bt_conn(), vm(VIBR_MOTOR_PIN) {
-    //init_accel();
 }
 
 void WatchSystem::init_accel() {
@@ -99,12 +97,12 @@ void WatchSystem::check_bluetooth() {
     }
 }
 
-void WatchSystem::get_accel_data(int *position) {
+void WatchSystem::get_accel_data(double *position) {
     int16_t x, y, z, t;
     xl.readXYZTData(x, y, z, t);
-    position[0] = x;
-    position[1] = y;
-    position[2] = z;
+    position[0] = x / 100.0;
+    position[1] = y / 100.0;
+    position[2] = z / 100.0;
 
     char buffer[5];
     itoa(x, buffer, 10);

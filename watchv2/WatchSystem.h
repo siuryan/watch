@@ -51,8 +51,6 @@ class WatchSystem {
     ADXL362 xl;
     VibrationMotor vm;
 
-    void init_accel();
-
     public:
     WatchSystem();
     ~WatchSystem();
@@ -63,10 +61,11 @@ class WatchSystem {
     byte get_num_stored_messages();
     Adafruit_SSD1306 * get_display();
     time_t get_time_now();
-    void get_accel_data(int *position);
+    void get_accel_data(double *position);
     bool has_viewed_messages();
     void set_viewed_messages(bool vm);
 
+    void init_accel();
     void clear_messages();
     void update_time();
 

@@ -42,7 +42,7 @@ class Watch {
     void check_bluetooth();
     void add_screen(Screen *screen);
     void switch_screen(byte new_screen);
-    bool should_sleep(int *position);
+    bool should_sleep(double *position);
 
     void update_screen();
     void update_screen(bool button1_pressed, bool button2_pressed, short int pot_pos);
