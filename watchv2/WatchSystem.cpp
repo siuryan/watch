@@ -80,7 +80,7 @@ void WatchSystem::check_bluetooth() {
         messages.push(message);
         ++num_messages;
         viewed_messages = false;
-        vm.vibrate(250);
+        vm.vibrate(400);
         break;
 
     case 2:

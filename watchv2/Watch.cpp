@@ -23,8 +23,8 @@ void Watch::init() {
     watch_system.init_accel();
 
     add_screen(new HomeScreen());
-    //add_screen(new TestScreen());
     add_screen(new MessageScreen());
+    //add_screen(new TestScreen());
 }
 
 void Watch::add_screen(Screen *screen) {
