@@ -68,9 +68,6 @@ void HomeScreen::update(WatchSystem *watch_system) {
         display->println("*");
     }
 
-    display->setCursor(0, display->height()-10);
-    display->println(watch_system->get_health()->get_footsteps());
-
     display->display();
 }
 
