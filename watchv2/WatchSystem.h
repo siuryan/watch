@@ -29,6 +29,11 @@
     #include "VibrationMotor.h"
 #endif
 
+#ifndef HEALTH_H
+#define HEALTH_H
+    #include "Health.h"
+#endif
+
 class WatchSystem {
 
     private:
@@ -50,6 +55,7 @@ class WatchSystem {
     BluetoothConnection bt_conn;
     ADXL362 xl;
     VibrationMotor vm;
+    Health health;
 
     public:
     WatchSystem();
@@ -64,10 +70,12 @@ class WatchSystem {
     void get_accel_data(double *position);
     bool has_viewed_messages();
     void set_viewed_messages(bool vm);
+    Health * get_health();
 
     void init_accel();
     void clear_messages();
     void update_time();
 
     void check_bluetooth();
+    void update_health(const double *position);
 };

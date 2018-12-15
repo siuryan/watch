@@ -6,7 +6,7 @@ const char *WatchSystem::DATETIME_FORMAT = "%d/%d/%d %d:%d:%d";
 WatchSystem::WatchSystem()
     : num_messages(0), viewed_messages(false),
       display(OLED_RESET),
-      time_now(0), bt_conn(), vm(VIBR_MOTOR_PIN) {
+      time_now(0), bt_conn(), vm(VIBR_MOTOR_PIN), health() {
 }
 
 void WatchSystem::init_accel() {
@@ -48,6 +48,10 @@ bool WatchSystem::has_viewed_messages() {
 
 void WatchSystem::set_viewed_messages(bool vm) {
     viewed_messages = vm;
+}
+
+Health * WatchSystem::get_health() {
+    return &health;
 }
 
 void WatchSystem::clear_messages() {
@@ -103,12 +107,13 @@ void WatchSystem::get_accel_data(double *position) {
     position[0] = x / 100.0;
     position[1] = y / 100.0;
     position[2] = z / 100.0;
+    Serial.print(x);
+    Serial.print("\t");
+    Serial.print(y);
+    Serial.print("\t");
+    Serial.println(z);
+}
 
-    char buffer[5];
-    itoa(x, buffer, 10);
-    bt_conn.send_message(buffer);
-    itoa(y, buffer, 10);
-    bt_conn.send_message(buffer);
-    itoa(z, buffer, 10);
-    bt_conn.send_message(buffer);
+void WatchSystem::update_health(const double *position) {
+    health.update_footsteps(position);
 }

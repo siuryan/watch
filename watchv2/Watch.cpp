@@ -23,8 +23,8 @@ void Watch::init() {
     watch_system.init_accel();
 
     add_screen(new HomeScreen());
-    add_screen(new MessageScreen());
-    //add_screen(new TestScreen());
+    //add_screen(new MessageScreen());
+    add_screen(new TestScreen());
 }
 
 void Watch::add_screen(Screen *screen) {
@@ -53,6 +53,8 @@ void Watch::update() {
 
     watch_system.update_time();
     watch_system.check_bluetooth();
+
+    watch_system.update_health(position);
 
     update_screen(l_button.is_pressed(), r_button.is_pressed(), analogRead(POT_PIN));
 }

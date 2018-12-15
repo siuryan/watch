@@ -93,20 +93,11 @@ class QueueArray {
     // check if the queue is full.
     bool isFull () const;
 
-    // set the printer of the queue.
-    void setPrinter (Print & p);
-
     void toArray(T *arr, int n) const;
 
   private:
     // resize the size of the queue.
     void resize (const int s);
-
-    // exit report method in case of error.
-    void exit (const char * m) const;
-
-    // led blinking method in case of error.
-    void blink () const;
 
     // the initial size of the queue.
     static const int initialSize = 2;
@@ -114,7 +105,6 @@ class QueueArray {
     // the pin number of the on-board led.
     static const int ledPin = 13;
 
-    Print * printer; // the printer of the queue.
     T * contents;    // the array of the queue.
 
     int size;        // the size of the queue.
@@ -133,8 +123,6 @@ QueueArray<T>::QueueArray () {
   head = 0;       // set the head of the queue to zero.
   tail = 0;       // set the tail of the queue to zero.
 
-  printer = NULL; // set the printer of queue to point nowhere.
-
   // allocate enough memory for the array.
   contents = (T *) malloc (sizeof (T) * initialSize);
 
@@ -152,8 +140,7 @@ QueueArray<T>::~QueueArray () {
   free (contents); // deallocate the array of the queue.
 
   contents = NULL; // set queue's array pointer to nowhere.
-  printer = NULL;  // set the printer of queue to point nowhere.
-
+  
   size = 0;        // set the size of queue to zero.
   items = 0;       // set the number of items of queue to zero.
 
@@ -286,41 +273,6 @@ template<typename T>
     for (int i = 0; i < n; ++i) {
         arr[i] = contents[i];
     }
-}
-
-
-// set the printer of the queue.
-template<typename T>
-void QueueArray<T>::setPrinter (Print & p) {
-  printer = &p;
-}
-
-// exit report method in case of error.
-template<typename T>
-void QueueArray<T>::exit (const char * m) const {
-  // print the message if there is a printer.
-  if (printer)
-    printer->println (m);
-
-  // loop blinking until hardware reset.
-  blink ();
-}
-
-// led blinking method in case of error.
-template<typename T>
-void QueueArray<T>::blink () const {
-  // set led pin as output.
-  pinMode (ledPin, OUTPUT);
-
-  // continue looping until hardware reset.
-  while (true) {
-    digitalWrite (ledPin, HIGH); // sets the LED on.
-    delay (250);                 // pauses 1/4 of second.
-    digitalWrite (ledPin, LOW);  // sets the LED off.
-    delay (250);                 // pauses 1/4 of second.
-  }
-
-  // solution selected due to lack of exit() and assert().
 }
 
 #endif // _QUEUEARRAY_H
