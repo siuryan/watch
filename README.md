@@ -2,9 +2,7 @@
 
 Chron-x is an open source, DIY, and affordable smartwatch that can be built by anyone, from the hobbyist to the professional.
 
-<p align="center">
-  <img src="https://cdn-images-1.medium.com/max/600/1*dnfMTGOmjRz-PVHuuYGqXw.jpeg"/>
-</p>
+[See how I built Chron-x!](https://medium.com/@ryansiu/how-to-make-your-own-smartwatch-35ff8306c160)
 
 ## Features
 - Notifications using an Android app to connect to Chron-x via Bluetooth
